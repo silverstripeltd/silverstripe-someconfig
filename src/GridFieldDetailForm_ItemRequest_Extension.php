@@ -7,6 +7,7 @@ use SilverStripe\Core\Extension;
 
 class GridFieldDetailForm_ItemRequest_Extension extends Extension
 {
+    use SomeConfigAdmin;
     /**
      * Make the back link go to the root
      */
@@ -19,7 +20,7 @@ class GridFieldDetailForm_ItemRequest_Extension extends Extension
             $linkPartsLength = count($linkParts);
             if ($linkPartsLength) {
                 $class = array_pop($linkParts);
-                if (SomeConfigAdmin::isConfig($class)) {
+                if ($this->owner->isConfig($class)) {
                     // Update the breadcrumbs
                     $controller = Controller::curr();
                     $items->last()->setField('Title', $firstLink->getField('Title'));
